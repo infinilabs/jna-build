@@ -1,7 +1,7 @@
 apply plugin: 'maven-publish'
 
-group = 'org.elasticsearch'
-String upstreamVersion = '5.10.0'
+group = 'org.easysearch'
+String upstreamVersion = '5.13.0'
 
 // Rarely, modifications may need to be made to the jna jar that
 // aren't reflected in the upstream.  A suffix can be supplied to bump
@@ -62,7 +62,7 @@ task extractRelease(type: Copy) {
 /** Remove native libs for platforms we do not support */
 task removeUnsupported(type: Delete) {
   dependsOn extractRelease
-  List<String> inclusions = ['darwin', 'linux-aarch64', 'linux-x86-64', 'win32-x86-64']
+  List<String> inclusions = ['darwin', 'linux-riscv64', 'linux-aarch64', 'linux-loongarch64', 'linux-x86-64', 'win32-x86-64']
   for (File arch : file("${jarDir}/${pkgDir}/").listFiles()) {
     // skip non-directories
     if (arch.isDirectory() == false) {
